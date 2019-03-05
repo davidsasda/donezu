@@ -1,0 +1,18 @@
+{
+  "name": "donezu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidsasda/donezu.git"
+  },
+  "author": "David Sasda, Rikki Sasda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidsasda/donezu/issues"
+  },
+  "homepage": "https://github.com/davidsasda/donezu#readme"
+}
