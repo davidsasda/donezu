@@ -1,9 +1,10 @@
 {
   "name": "donezu",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "parcel ./src/index.html --open",
+    "build": "parcel build ./src/index.html"
   },
   "repository": {
     "type": "git",
@@ -14,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/davidsasda/donezu/issues"
   },
-  "homepage": "https://github.com/davidsasda/donezu#readme"
+  "homepage": "https://github.com/davidsasda/donezu#readme",
+  "dependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "parcel-bundler": "^1.11.0"
+  }
 }
