@@ -1,0 +1,84 @@
+{
+  "tasks" : [
+    {
+      "task": "Meetup: #trustedtakesdenver",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Unwined: Ep3",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Unwined: Ep3 snippet",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Blog: Category page",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Blog: Author page",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Blog: Social media",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Blog: Related articles",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Blog: Instagram feed",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Blog: 301 redirect",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Profile: 'Current' education experience",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Referral: Widget + in-app page + custom QR",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Positions: Could be more clear",
+      "due": "",
+      "status": "incomplete"
+    },
+    {
+      "task": "Webflow: Knowledge base",
+      "due": "FRI, Mar 8",
+      "status": "incomplete"
+    },
+    {
+      "task": "Quick Win: Better match page transition",
+      "due": "TUE, Mar 12",
+      "status": "incomplete"
+    },
+    {
+      "task": "Blog: hero fix",
+      "due": "",
+      "status": "complete"
+    },
+    {
+      "task": "Blog: landing page",
+      "due": "",
+      "status": "complete"
+    }
+  ]
+}
