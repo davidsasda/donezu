@@ -20,29 +20,30 @@ class NewTask extends React.Component {
       query: event.target.value
     })
   }
-
-  handleEnterKey(event) {
-    if (event.key === 'Enter') {
-      this.props.addTask(this.state.query);
-      this.setState({
-        query: '',
-        toggle: !this.state.toggle
-      })
-    }
+  
+  handleAddTask() {
+    this.props.addTask(this.state.query);
+    this.setState({
+      query: '',
+      toggle: false
+    })
   }
 
   render() {
     return (
       <div>
-        <button onClick={() => (this.toggle())}>+</button>
+        <button onClick={() => this.toggle()}>+</button>
         {this.state.toggle && 
           <input
             autoFocus
             type='text'
             value={this.state.query}
             onChange={this.handleChange.bind(this)}
-            onKeyPress={(event) => this.handleEnterKey(event)}
+            onKeyPress={(event) => event.key === 'Enter' && this.handleAddTask()}
           ></input>}
+        {this.state.toggle &&
+          <button onClick={() => this.handleAddTask()}> {'<'}</button>
+        }
       </div>
     )
   }
