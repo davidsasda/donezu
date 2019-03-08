@@ -17,6 +17,9 @@ class NewTask extends React.Component {
   handleEnterKey(event) {
     if (event.key === 'Enter') {
       this.props.addTask(this.state.query);
+      this.setState({
+        query: ''
+      })
     }
   }
 
