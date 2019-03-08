@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/davidsasda/donezu#readme",
   "dependencies": {
+    "moment": "^2.24.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },
