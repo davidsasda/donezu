@@ -34,9 +34,11 @@ class NewTask extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={() => this.toggle()}>+</button>
+        <button onClick={() => (this.toggle())}>+</button>
         {this.state.toggle && 
-          <input 
+          <input
+            autoFocus
+            type='text'
             value={this.state.query}
             onChange={this.handleChange.bind(this)}
             onKeyPress={(event) => this.handleEnterKey(event)}
