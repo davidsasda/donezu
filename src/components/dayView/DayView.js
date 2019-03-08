@@ -1,6 +1,6 @@
 import React from 'react';
 import TaskList from './TaskList';
-import moment from'moment';
+import moment from 'moment';
 
 const DayView = ({tasks, addTask}) => {
   return (

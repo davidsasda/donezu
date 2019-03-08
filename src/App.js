@@ -12,7 +12,7 @@ class App extends React.Component {
     this.addTask = this.addTask.bind(this);
   };
 
-  componentWillMount() {
+  componentDidMount() {
     console.log('sample data', this.state.tasks);
   }
 
@@ -23,11 +23,9 @@ class App extends React.Component {
       status: 'incomplete'
     };
     if (task) {
-      console.log('Adding new task');
       this.setState(prevState => ({
         tasks: [newTask, ...prevState.tasks]
       }));
-      console.log('Updated tasks', this.state.tasks);
     } else {
       console.log('Failed to add new task.')
     }

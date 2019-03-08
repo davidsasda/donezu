@@ -1,5 +1,5 @@
 import React from 'react';
-import PresentTask from './PresentTask';
+import Task from './Task';
 import NewTask from './NewTask';
 
 const TaskList = ({tasks, addTask}) => {
@@ -7,14 +7,8 @@ const TaskList = ({tasks, addTask}) => {
     <div>
         <NewTask addTask={addTask}/>
         {tasks.map((task, i) => {
-          return <PresentTask key={i} task={task} />
+          return <Task key={i} task={task} />
         })}
-        {/* {tasks.map((task, i) => {
-          return <FutureTask key={i} task={task} />
-        })}
-        {tasks.map((task, i) => {
-          return <PastTask key={i} task={task} />
-        })} */}
     </div>
   )
 }
