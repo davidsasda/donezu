@@ -1,9 +1,11 @@
 import React from 'react';
 import PresentTask from './PresentTask';
+import NewTask from './NewTask';
 
-const TaskList = ({tasks}) => {
+const TaskList = ({tasks, addTask}) => {
   return (
     <div>
+        <NewTask addTask={addTask}/>
         {tasks.map((task, i) => {
           return <PresentTask key={i} task={task} />
         })}

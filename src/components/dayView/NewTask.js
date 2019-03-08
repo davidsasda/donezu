@@ -23,7 +23,7 @@ class NewTask extends React.Component {
   render() {
     return (
       <div>
-        <input 
+        + <input 
           value={this.state.query}
           onChange={this.handleChange.bind(this)}
           onKeyPress={(event) => this.handleEnterKey(event)}
