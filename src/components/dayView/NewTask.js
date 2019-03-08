@@ -4,8 +4,15 @@ class NewTask extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: ''
+      query: '',
+      toggle: false
     }
+  }
+
+  toggle() {
+    this.setState({
+      toggle: !this.state.toggle
+    })
   }
 
   handleChange(event) {
@@ -18,7 +25,8 @@ class NewTask extends React.Component {
     if (event.key === 'Enter') {
       this.props.addTask(this.state.query);
       this.setState({
-        query: ''
+        query: '',
+        toggle: !this.state.toggle
       })
     }
   }
@@ -26,11 +34,13 @@ class NewTask extends React.Component {
   render() {
     return (
       <div>
-        + <input 
-          value={this.state.query}
-          onChange={this.handleChange.bind(this)}
-          onKeyPress={(event) => this.handleEnterKey(event)}
-        ></input>
+        <button onClick={() => this.toggle()}>+</button>
+        {this.state.toggle && 
+          <input 
+            value={this.state.query}
+            onChange={this.handleChange.bind(this)}
+            onKeyPress={(event) => this.handleEnterKey(event)}
+          ></input>}
       </div>
     )
   }
