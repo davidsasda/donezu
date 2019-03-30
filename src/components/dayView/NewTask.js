@@ -13,6 +13,9 @@ class NewTask extends React.Component {
     this.setState({
       toggle: !this.state.toggle
     })
+    if (this.state.toggle && this.state.query) {
+      this.handleAddTask();
+    }
   }
 
   handleChange(event) {
@@ -31,19 +34,20 @@ class NewTask extends React.Component {
 
   render() {
     return (
-      <div>
-        <button onClick={() => this.toggle()}>+</button>
+      <div className="border-b border-steel-lite py-3 pl-2">
+        <button 
+          className="text-ake font-sans font-thin text-3xl"
+          onClick={() => this.toggle()}
+        >+</button>
         {this.state.toggle && 
           <input
             autoFocus
-            type='text'
-            value={this.state.query}
+            className='text-ake font-sans font-thin text-lg ml-2'
             onChange={this.handleChange.bind(this)}
             onKeyPress={(event) => event.key === 'Enter' && this.handleAddTask()}
+            type='text'
+            value={this.state.query}
           ></input>}
-        {this.state.toggle &&
-          <button onClick={() => this.handleAddTask()}> {'<'}</button>
-        }
       </div>
     )
   }

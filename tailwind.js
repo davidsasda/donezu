@@ -48,9 +48,11 @@ let colors = {
 
   'black': '#22292f',
   'white': '#FFFFFF',
+
   'ake': '#BC002D',
   'sakura': '#EEBFCA',
   'sakura-lite': '#FCF5F6',
+  
   'midnight': '#282828',
   'steel': '#C8C8C8',
   'steel-lite': '#E8E8E8'
@@ -122,8 +124,19 @@ module.exports = {
 
   fonts: {
     'sans': [
-      'Noto Sans JP',
-      'sans-serif'
+      'Noto Sans JP Regular',
+      'system-ui',
+      'BlinkMacSystemFont',
+      '-apple-system',
+      'Segoe UI',
+      'Roboto',
+      'Oxygen',
+      'Ubuntu',
+      'Cantarell',
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      'sans-serif',
     ]
   },
 
@@ -177,14 +190,11 @@ module.exports = {
   */
 
   fontWeights: {
-    'hairline': 100,
-    'thin': 200,
+    'thin': 100,
     'light': 300,
     'normal': 400,
     'medium': 500,
-    'semibold': 600,
     'bold': 700,
-    'extrabold': 800,
     'black': 900,
   },
 
@@ -224,7 +234,7 @@ module.exports = {
   */
 
   tracking: {
-    'tight': '-0.05em',
+    'tight': '-0.025em',
     'normal': '0',
     'wide': '0.05em',
   },

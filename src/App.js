@@ -33,7 +33,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container mx-auto font-sans text-ake">
         <DayView tasks={this.state.tasks} addTask={this.addTask}/>
       </div>
     )
