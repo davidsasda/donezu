@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "tailwind build tailwind.css -o ./src/style.css && parcel ./src/index.html --open",
+    "start": "tailwind build tailwind.css -c ./tailwind.js -o ./src/style.css && parcel ./src/index.html --open",
     "build": "parcel build ./src/index.html"
   },
   "repository": {
