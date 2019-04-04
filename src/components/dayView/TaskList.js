@@ -6,9 +6,11 @@ const TaskList = ({tasks, addTask}) => {
   return (
     <div className="tracking-none font-light">
         <NewTask addTask={addTask}/>
-        {tasks.map((task, i) => {
-          return <Task key={i} task={task}/>
-        })}
+        <div className=" max-h-screen-80 overflow-y-auto">
+          {tasks.map((task, i) => {
+            return <Task key={i} task={task}/>
+          })}
+        </div>
     </div>
   )
 }

@@ -234,6 +234,7 @@ module.exports = {
   */
 
   tracking: {
+    'tighter': '-0.05em',
     'tight': '-0.025em',
     'normal': '0',
     'wide': '0.05em',
@@ -474,6 +475,8 @@ module.exports = {
 
   minWidth: {
     '0': '0',
+    '200px': '200px',
+    '825px': '825px',
     'full': '100%',
   },
 
@@ -548,6 +551,10 @@ module.exports = {
   maxHeight: {
     'full': '100%',
     'screen': '100vh',
+    'screen-95': '95vh',
+    'screen-90': '90vh',
+    'screen-85': '85vh',
+    'screen-80': '80vh'
   },
 
 
