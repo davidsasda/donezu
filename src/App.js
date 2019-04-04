@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DayView from './components/dayView/DayView'
+import WeekView from './components/weekPane/WeekView';
 import data from './exampleData.json';
 
 class App extends React.Component {
@@ -34,6 +35,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="flex font-sans">
+        <WeekView />
         <DayView tasks={this.state.tasks} addTask={this.addTask}/>
       </div>
     )
