@@ -39,7 +39,10 @@ const readTask = async (userID, cb) => {
 }
 
 const updateTask = () => {};
-const deleteTask = () => {};
+const deleteTask = (taskID, cb) => {
+  console.log('mongoose deleteTask');
+  Donezu.deleteOne({'_id': taskID}, cb);
+};
 
 module.exports.createTask = createTask;
 module.exports.readTask = readTask;

@@ -4,6 +4,7 @@ import DayView from './components/dayView/DayView'
 import WeekView from './components/weekPane/WeekView';
 
 const axios = require('axios');
+const server = 'http://localhost:3000';
 
 class App extends React.Component {
   constructor() {
@@ -13,6 +14,7 @@ class App extends React.Component {
       tasks: []
     }
     this.addTask = this.addTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
     this.setState = this.setState.bind(this);
   };
 
@@ -21,7 +23,7 @@ class App extends React.Component {
   }
 
   getTasks() {
-    axios.get(`http://localhost:3000/db/${this.state.userID}`)
+    axios.get(`${server}/db/${this.state.userID}`)
     .then(data => {
       this.setState({
         tasks: data.data
@@ -39,7 +41,7 @@ class App extends React.Component {
       due: dueDate
     };
     if (task) {
-      axios.post(`http://localhost:3000/db/${this.state.userID}`, newTask)
+      axios.post(`${server}/db/${this.state.userID}`, newTask)
       .catch(err => {
         console.log(err);
       })
@@ -52,11 +54,29 @@ class App extends React.Component {
     }
   }
 
+  deleteTask(task, index) {
+    axios.delete(`${server}/db/${this.state.userID}/${task._id}`)
+    .then(() => {
+      let updatedTasks = this.state.tasks;
+      if (index === 0) {
+        updatedTasks.shift();
+      } else {
+        updatedTasks = [...updatedTasks.slice(0, index), ...updatedTasks.slice(index + 1)];
+      }
+      this.setState({
+        tasks: updatedTasks
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
   render() {
     return (
       <div className="flex font-sans">
         <WeekView />
-        <DayView tasks={this.state.tasks} addTask={this.addTask}/>
+        <DayView tasks={this.state.tasks} addTask={this.addTask} deleteTask={this.deleteTask}/>
       </div>
     )
   };

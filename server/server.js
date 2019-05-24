@@ -48,8 +48,20 @@ app.put('/db/:userID', (req, res) => {
   console.log('Donezu Update - Pinged');
 });
 
-app.delete('/db/:userID', (req, res) => {
+app.delete('/db/:userID/:taskID', (req, res) => {
   console.log('Donezu Delete - Pinged');
+  db.deleteTask(
+    req.params.taskID,
+    (err) => {
+      if (err) {
+        console.log('Donezu Delete - Error');
+        res.status(500).send(err);
+      } else {
+        console.log('Donezu Delete - Successful');
+        res.status(200).send();
+      }
+   }
+  );
 });
 
 
