@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "tailwind build tailwind.css -c ./tailwind.js -o ./src/style.css && parcel ./src/index.html --open",
-    "build": "parcel build ./src/index.html",
+    "start": "tailwind build ./client/tailwind.css -c ./client/tailwind.js -o ./client/src/style.css && parcel ./client/src/index.html --open",
+    "build": "parcel build ./client/src/index.html",
     "dev-server": "nodemon server/server.js"
   },
   "repository": {

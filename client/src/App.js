@@ -2,28 +2,48 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import DayView from './components/dayView/DayView'
 import WeekView from './components/weekPane/WeekView';
-import data from './exampleData.json';
+
+const axios = require('axios');
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      tasks: data.tasks
+      userID: '123',
+      tasks: []
     }
     this.addTask = this.addTask.bind(this);
+    this.setState = this.setState.bind(this);
   };
 
   componentDidMount() {
-    console.log('sample data', this.state.tasks);
+    this.getTasks();
+  }
+
+  getTasks() {
+    axios.get(`http://localhost:3000/db/${this.state.userID}`)
+    .then(data => {
+      this.setState({
+        tasks: data.data
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   addTask(task, dueDate = '') {
     let newTask = {
+      userID: this.state.userID,
       task: task,
-      due: dueDate,
-      status: 'incomplete'
+      due: dueDate
     };
     if (task) {
+      axios.post(`http://localhost:3000/db/${this.state.userID}`, newTask)
+      .catch(err => {
+        console.log(err);
+      })
+
       this.setState(prevState => ({
         tasks: [newTask, ...prevState.tasks]
       }));
