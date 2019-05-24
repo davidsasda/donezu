@@ -6,15 +6,11 @@ const db = require('../database/database.js');
 const app = express();
 const port = 3000;
 
-
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
-
-// CRUD
-
-// Create
+// Todo List Routes
 app.post('/db/:userID', (req, res) => {
   console.log('Donezu Create - Pinged');
   console.log(`userID - ${req.params.userID}`);
@@ -26,13 +22,12 @@ app.post('/db/:userID', (req, res) => {
         res.status(500).send(err);
       } else {
         console.log('Donezu Create - Successful');
-        res.status(201).send(data)
+        res.status(201);
       }
     }
   );
 });
 
-// Read
 app.get('/db/:userID', (req, res) => {
   console.log('Donezu Read - Pinged');
   db.readTask(
@@ -49,10 +44,31 @@ app.get('/db/:userID', (req, res) => {
   );
 });
 
-// Update
+app.put('/db/:userID', (req, res) => {
+  console.log('Donezu Update - Pinged');
+});
+
+app.delete('/db/:userID', (req, res) => {
+  console.log('Donezu Delete - Pinged');
+});
 
 
-// Delete
+// Archive routes
+app.post('/archive/:userID', (req, res) => {
+  console.log('Donezu Archive Create - Pinged');
+});
+
+app.get('archive/:userID/:date', (req, res) => {
+  console.log('Donezu Archive Read - Pinged');
+});
+
+app.put('archive/:userID/', (req, res) => {
+  console.log('Donezu Archive Update - Pinged');
+});
+
+app.delete('archive/:userID/', (req, res) => {
+  console.log('Donezu Archive Delete - Pinged');
+});
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);

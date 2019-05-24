@@ -38,5 +38,10 @@ const readTask = async (userID, cb) => {
   data.length ? cb(null, data) : cb('error', null);
 }
 
+const updateTask = () => {};
+const deleteTask = () => {};
+
 module.exports.createTask = createTask;
 module.exports.readTask = readTask;
+module.exports.updateTask = updateTask;
+module.exports.deleteTask = deleteTask;
