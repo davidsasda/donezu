@@ -7,11 +7,11 @@ import donezu from '/static/donezu.svg';
 const WeekView = () => {
   let currentWeek = dateFns.startOfWeek(new Date(), {weekStartsOn: 1})
   return (
-    <div className="h-screen overflow-y-auto flex-none w-64 font-light text-sm tracking-tight">
-      <div className="brand w-64 border-b border-steel-lite sticky bg-white pt-10 px-10">
+    <div>
+      <div className="brand border-b border-steel-lite sticky bg-white pt-10 px-10">
         <img src={donezu} />
       </div>
-      <div className="weeks w-64 py-3 px-10">
+      <div className="weeks py-3 px-10">
         <CurrentWeek startOfWeek={currentWeek}/>
         <WeekList startOfWeek={dateFns.subWeeks(currentWeek, 1)}/>
         <WeekList startOfWeek={dateFns.subWeeks(currentWeek, 2)}/>
@@ -23,7 +23,7 @@ const WeekView = () => {
       </div>
       <style jsx>{`
         .brand {
-          height: 7.95rem;
+          height: 7.5rem;
         }
       `}</style>
     </div>

@@ -38,7 +38,7 @@ class NewTask extends React.Component {
     return (
       <div className="sticky bg-white">
         <div className="pt-8 outline-none border-b border-steel-lite">
-          <div className="text-3xl tracking-tight font-thin pb-4 ml-2">
+          <div className="text-2xl tracking-tight font-thin pb-4 ml-2">
             <b className="font-bold">{dateFns.format(new Date(), 'dddd')}</b>
             {dateFns.format(new Date(), ' — MMMM Do, YYYY')}
           </div>
