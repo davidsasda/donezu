@@ -8,7 +8,7 @@ const WeekView = () => {
   let currentWeek = dateFns.startOfWeek(new Date(), {weekStartsOn: 1})
   return (
     <div>
-      <div className="brand border-b border-steel-lite sticky bg-white pt-10 px-10">
+      <div className="brand border-b border-steel-lite sticky bg-white pt-12 px-10">
         <img src={donezu} />
       </div>
       <div className="weeks py-3 px-10">
@@ -23,7 +23,7 @@ const WeekView = () => {
       </div>
       <style jsx>{`
         .brand {
-          height: 7.5rem;
+          height: 8.3rem;
         }
       `}</style>
     </div>

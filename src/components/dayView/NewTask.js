@@ -5,17 +5,7 @@ class NewTask extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
-      toggle: false
-    }
-  }
-
-  toggle() {
-    this.setState({
-      toggle: !this.state.toggle
-    })
-    if (this.state.toggle && this.state.query) {
-      this.handleAddTask();
+      query: ''
     }
   }
 
@@ -28,17 +18,15 @@ class NewTask extends React.Component {
   handleAddTask() {
     this.props.addTask(this.state.query);
     this.setState({
-      query: '',
-      toggle: false
+      query: ''
     })
   }
   
-
   render() {
     return (
-      <div className="sticky bg-white">
-        <div className="pt-8 outline-none border-b border-steel-lite">
-          <div className="text-2xl tracking-tight font-thin pb-4 ml-2">
+      <div className="sticky bg-white h-32 sm:mb-1">
+        <div className="pt-4 sm:pt-10 outline-none border-b border-steel-lite">
+          <div className="text-xl md:text-2xl h-12 font-thin ml-2">
             <b className="font-bold">{dateFns.format(new Date(), 'dddd')}</b>
             {dateFns.format(new Date(), ' — MMMM Do, YYYY')}
           </div>
@@ -46,7 +34,7 @@ class NewTask extends React.Component {
             <label className="add-icon text-ake font-thin text-3xl ml-2 z-10 absolute">+</label>
             <input
               autoFocus
-              className='add-task text-sm text-ake leading-loose hover:bg-sakura-lite focus:bg-sakura-lite outline-none -ml-0 p-2 pl-8 min-w-full'
+              className='add-task text-sm text-ake leading-loose hover:bg-sakura-lite focus:bg-sakura-lite outline-none p-2 pl-8 min-w-full'
               onChange={this.handleChange.bind(this)}
               onKeyPress={(event) => event.key === 'Enter' && this.handleAddTask()}
               type='text'

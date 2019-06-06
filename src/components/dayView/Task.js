@@ -4,7 +4,7 @@ const Task = ({task}) => {
   let style = "hover:bg-sakura-lite text-sm border-b border-steel-lite py-3 pl-2";
 
   if (task.status === 'complete') {
-    style = 'line-through text-steel border-b border-steel-lite py-3 pl-2'
+    style = 'hover:bg-sakura-lite line-through text-steel text-sm border-b border-steel-lite py-3 pl-2'
   }
   
   return (

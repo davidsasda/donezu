@@ -4,7 +4,7 @@ import NewTask from './NewTask';
 
 const TaskList = ({tasks, addTask}) => {
   return (
-    <div className="h-screen overflow-y-auto px-4 sm:px-8 md:px-24">
+    <div className="h-screen overflow-y-auto px-4 md:px-12 lg:px-24">
       <NewTask addTask={addTask}/>
       <div className="pb-12">
         {tasks.map((task, i) => {
