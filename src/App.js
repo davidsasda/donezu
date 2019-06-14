@@ -34,9 +34,18 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="flex font-sans">
-        <WeekView />
-        <DayView tasks={this.state.tasks} addTask={this.addTask}/>
+      <div>
+        <div className="sticky w-full h-16 bg-white shadow z-20 sm:hidden">
+          boink
+        </div>
+        <div className="flex font-sans">
+          <div className="h-screen overflow-y-auto w-64 font-light text-sm tracking-tight hidden sm:block">
+            <WeekView />
+          </div>
+          <div className="h-screen flex-col flex-grow text-ake">
+            <DayView tasks={this.state.tasks} addTask={this.addTask}/>
+          </div>
+        </div>
       </div>
     )
   };
