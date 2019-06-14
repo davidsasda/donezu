@@ -68,7 +68,16 @@ class App extends React.Component {
       });
     })
     .catch(err => {
-      console.log(err);
+      // console.log(err);
+      let updatedTasks = this.state.tasks;
+      if (index === 0) {
+        updatedTasks.shift();
+      } else {
+        updatedTasks = [...updatedTasks.slice(0, index), ...updatedTasks.slice(index + 1)];
+      }
+      this.setState({
+        tasks: updatedTasks
+      });
     });
   }
 
