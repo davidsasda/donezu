@@ -11,12 +11,8 @@ let style = "bg-white hover:bg-sakura-lite border-b border-steel-lite py-3 pl-2"
 //   let toggle = false;
 
 //   return (
-//     <div className={style}
-//       onMouseEnter={() => {toggle = !toggle}}
-//       onMouseLeave={() => {toggle = !toggle}}
-//     >
+//     <div className={style}>
 //       {task.task}
-//       {toggle ? <button onClick={() => deleteTask(task)}> 'x' </button> : null}
 //     </div>
 //   )
 // }

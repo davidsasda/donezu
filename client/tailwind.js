@@ -124,7 +124,7 @@ module.exports = {
 
   fonts: {
     'sans': [
-      'Noto Sans JP Regular',
+      'Noto Sans JP',
       'system-ui',
       'BlinkMacSystemFont',
       '-apple-system',

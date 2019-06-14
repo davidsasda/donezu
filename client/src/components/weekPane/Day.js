@@ -11,7 +11,7 @@ const Day = ({day}) => {
   }
 
   return (
-    <div className={style + ' pb-2'}>
+    <div className={style + ' pb-3'}>
       <b className="font-bold">{dateFns.format(day, 'ddd').toUpperCase()}</b>
       {dateFns.format(day, ' – MMM D, YYYY')}
     </div>
