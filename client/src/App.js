@@ -83,7 +83,7 @@ class App extends React.Component {
   getArchive() {
     let date = new Date();
     let year = dateFns.format(date, 'YYYY');
-    let month = dateFns.format(date, 'MMMM');
+    let month = dateFns.format(date, 'MM');
     let day = dateFns.format(date, 'DD');
     axios.get(`${server}/archives/${this.state.userID}/${year}/${month}/${day}`)
     .then(res => {
@@ -100,7 +100,7 @@ class App extends React.Component {
   completeTask(task, index) {
     let date = new Date();
     let year = dateFns.format(date, 'YYYY');
-    let month = dateFns.format(date, 'MMMM');
+    let month = dateFns.format(date, 'MM');
     let day = dateFns.format(date, 'DD');
     axios.post(`${server}/archives/${this.state.userID}/${year}/${month}/${day}`, {task: task, date: date})
     .then(() => {
