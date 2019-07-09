@@ -1,10 +1,16 @@
 import React from 'react';
 import TaskList from './TaskList';
 
-const DayView = ({tasks, addTask, deleteTask}) => {
+const DayView = ({tasks, completed, addTask, deleteTask, completeTask}) => {
   return (
     <div>
-      <TaskList tasks={tasks} addTask={addTask} deleteTask={deleteTask}/>
+      <TaskList
+        tasks={tasks}
+        completed={completed}
+        addTask={addTask}
+        deleteTask={deleteTask}
+        completeTask={completeTask}
+      />
     </div>
   )
 }

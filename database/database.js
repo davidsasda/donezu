@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/donezu', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/donezu', {useNewUrlParser: true});
 
 const db = mongoose.connection;
 
@@ -11,40 +11,68 @@ db.once('open', () => {
   console.log('mongoose connected successfully');
 });
 
-const taskSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     userID: String,
-    task: String,
-    due: String
+    password: String,
+    tasks: Array,
+    archives: Object
   }
 );
 
-const Donezu = mongoose.model('donezu', taskSchema);
+const User = mongoose.model('user', userSchema);
 
-const createTask = (task, cb) => {
-  console.log('mongoose createTask');
-  let newTask = new Donezu({
-    userID: task.userID,
-    task: task.task,
-    due: task.due
-  });
-  newTask.save();
-  cb(null, newTask);
-}
+const createTask = async (userID, task, cb) => {
+  let user = await User.findOne({'userID': userID}, 'tasks');
+  user.tasks.push(task);
+  let data = await User.updateOne(
+    {'userID': userID},
+    {$set: user}
+  );
+  cb(null, data);
+};
 
 const readTask = async (userID, cb) => {
-  console.log('mongoose readTask');
-  const data = await Donezu.find({'userID' : userID});
-  data.length ? cb(null, data) : cb('error', null);
+  let data = await User.find({'userID': userID}, 'tasks');
+  data.length ? cb(null, data[0]) : cb('error', null);
 }
 
-const updateTask = () => {};
-const deleteTask = (taskID, cb) => {
-  console.log('mongoose deleteTask');
-  Donezu.deleteOne({'_id': taskID}, cb);
-};
+const deleteTask = async (userID, index, cb) => {
+  let user = await User.findOne({'userID': userID}, 'tasks');
+  user.tasks.splice(index, 1);
+  let data = await User.updateOne(
+    {'userID': userID},
+    {$set: user}
+  );
+  cb(null, data);
+}
+
+const archiveTask = async (userID, year, month, day, task, cb) => {
+  let user = await User.findOne({'userID': userID}, 'archives');
+  if (user.archives[year] && user.archives[year][month] && user.archives[year][month][day]) {
+    console.log(`${year}.${month}.${day} exists`);
+    user.archives[year][month][day].push(task);
+  } else {
+    console.log('creating new date');
+    user.archives[year][month][day] = [task];
+  }
+  let data = await User.updateOne(
+    {'userID': userID},
+    {$set: user}
+  );
+  cb(null, data);
+}
+
+const readArchive = async (userID, year, month, day, cb) => {
+  let user = await User.findOne({'userID': userID}, 'archives');
+  let data = user.archives[year][month][day];
+  data.length ? cb(null, data) : cb('archives not found', null);
+}
 
 module.exports.createTask = createTask;
 module.exports.readTask = readTask;
-module.exports.updateTask = updateTask;
+// module.exports.updateTask = updateTask;
 module.exports.deleteTask = deleteTask;
+
+module.exports.archiveTask = archiveTask;
+module.exports.readArchive = readArchive;

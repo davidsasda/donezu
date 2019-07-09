@@ -1,6 +1,49 @@
 import React from 'react';
 
-let style = "bg-white hover:bg-sakura-lite border-b border-steel-lite py-3 pl-2";
+class Task extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      toggle: false,
+    }
+  }
+  toggle() {
+    this.setState({
+      toggle: !this.state.toggle
+    });
+  }
+  handleDeleteTask() {
+    this.props.deleteTask(this.props.index);
+  }
+  handleCompleteTask() {
+    this.props.completeTask(this.props.task, this.props.index);
+  }
+
+  render() {
+    return (
+      <div 
+        className='bg-white hover:bg-sakura-lite border-b border-steel-lite py-3 pl-2'
+        onMouseEnter={() => this.toggle()}
+        onMouseLeave={() => this.toggle()}
+      >
+      {this.state.toggle &&
+        <button 
+          className="text-ake font-thin mr-2 z-10"
+          onClick={() => this.handleDeleteTask()}
+        >x</button>
+      }
+      <button
+        className="text-ake"
+        onClick={() => this.handleCompleteTask()}
+      >
+        {this.props.task}  
+      </button>
+      </div>
+    )
+  }
+}
+
+export default Task;
 
 // const Task = ({task, deleteTask}) => {
 //   let style = "bg-white hover:bg-sakura-lite border-b border-steel-lite py-3 pl-2";
@@ -16,36 +59,3 @@ let style = "bg-white hover:bg-sakura-lite border-b border-steel-lite py-3 pl-2"
 //     </div>
 //   )
 // }
-
-class Task extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      toggle: false,
-    }
-  }
-  toggle() {
-    this.setState({
-      toggle: !this.state.toggle
-    });
-  }
-  handleDeleteTask() {
-    this.props.deleteTask(this.props.task, this.props.index);
-  }
-
-  render() {
-    return (
-      <div className={style}
-        onMouseEnter={() => this.toggle()}
-        onMouseLeave={() => this.toggle()}
-      >
-        {this.props.task.task}
-        {this.state.toggle &&
-          <button onClick={() => this.handleDeleteTask()}
-        >x</button>}
-      </div>
-    )
-  }
-}
-
-export default Task;

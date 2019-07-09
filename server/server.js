@@ -13,8 +13,8 @@ app.use(cors());
 // Todo List Routes
 app.post('/db/:userID', (req, res) => {
   console.log('Donezu Create - Pinged');
-  console.log(`userID - ${req.params.userID}`);
   db.createTask(
+    req.params.userID,
     req.body,
     (err, data) => {
       if (err) {
@@ -26,7 +26,7 @@ app.post('/db/:userID', (req, res) => {
       }
     }
   );
-});
+})
 
 app.get('/db/:userID', (req, res) => {
   console.log('Donezu Read - Pinged');
@@ -38,7 +38,7 @@ app.get('/db/:userID', (req, res) => {
         res.status(500).send(err);
       } else {
         console.log('Donezu Read - Successful');
-        res.status(200).send(data);
+        res.status(200).send(data.tasks);
       }
     }
   );
@@ -48,11 +48,12 @@ app.put('/db/:userID', (req, res) => {
   console.log('Donezu Update - Pinged');
 });
 
-app.delete('/db/:userID/:taskID', (req, res) => {
+app.delete('/db/:userID/:index', (req, res) => {
   console.log('Donezu Delete - Pinged');
   db.deleteTask(
-    req.params.taskID,
-    (err) => {
+    req.params.userID,
+    req.params.index,
+    (err, data) => {
       if (err) {
         console.log('Donezu Delete - Error');
         res.status(500).send(err);
@@ -66,19 +67,50 @@ app.delete('/db/:userID/:taskID', (req, res) => {
 
 
 // Archive routes
-app.post('/archive/:userID', (req, res) => {
+app.post('/archives/:userID/:year/:month/:day', (req, res) => {
   console.log('Donezu Archive Create - Pinged');
+  db.archiveTask(
+    req.params.userID,
+    req.params.year,
+    req.params.month,
+    req.params.day,
+    req.body,
+    (err, data) => {
+      if (err) {
+        console.log('Donezu Archive Create - Error');
+        res.status(500).send(err);
+      } else {
+        console.log('Donezu Archive Create - Successful');
+        res.status(201).send();
+      }
+    }
+  )
 });
 
-app.get('archive/:userID/:date', (req, res) => {
+app.get('/archives/:userID/:year/:month/:day', (req, res) => {
   console.log('Donezu Archive Read - Pinged');
+  db.readArchive(
+    req.params.userID,
+    req.params.year,
+    req.params.month,
+    req.params.day,
+    (err, data) => {
+      if (err) {
+        console.log('Donezu Archive Read - Error');
+        res.status(500).send(err);
+      } else {
+        console.log('Donezu Archive Read - Successful');
+        res.status(200).send(data);
+      }
+    }
+  );
 });
 
-app.put('archive/:userID/', (req, res) => {
+app.put('/archives/:userID/', (req, res) => {
   console.log('Donezu Archive Update - Pinged');
 });
 
-app.delete('archive/:userID/', (req, res) => {
+app.delete('/archives/:userID/', (req, res) => {
   console.log('Donezu Archive Delete - Pinged');
 });
 
