@@ -66,7 +66,7 @@ const archiveTask = async (userID, year, month, day, task, cb) => {
 const readArchive = async (userID, year, month, day, cb) => {
   let user = await User.findOne({'userID': userID}, 'archives');
   let data = user.archives[year][month][day];
-  data.length ? cb(null, data) : cb('archives not found', null);
+  data && data.length ? cb(null, data) : cb('archives not found', null);
 }
 
 module.exports.createTask = createTask;
