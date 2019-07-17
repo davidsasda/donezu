@@ -4,7 +4,7 @@ import dateFns from 'date-fns';
 
 const WeekList = ({startOfWeek}) => {
   return (
-    <div className="pb-3">
+    <div className='pb-3'>
       <Day day={dateFns.addDays(startOfWeek, 6)}/>
       <Day day={dateFns.addDays(startOfWeek, 5)}/>
       <Day day={dateFns.addDays(startOfWeek, 4)}/>

@@ -28,12 +28,12 @@ class Task extends React.Component {
       >
       {this.state.toggle &&
         <button 
-          className="text-ake font-thin mr-2 z-10"
+          className='text-ake font-thin mr-2 z-10'
           onClick={() => this.handleDeleteTask()}
         >x</button>
       }
       <button
-        className="text-ake"
+        className='text-ake'
         onClick={() => this.handleCompleteTask()}
       >
         {this.props.task}  
@@ -46,7 +46,7 @@ class Task extends React.Component {
 export default Task;
 
 // const Task = ({task, deleteTask}) => {
-//   let style = "bg-white hover:bg-sakura-lite border-b border-steel-lite py-3 pl-2";
+//   let style = 'bg-white hover:bg-sakura-lite border-b border-steel-lite py-3 pl-2';
   
 //   if (task.status === 'complete') {
 //     style = 'line-through text-steel bg-white hover:bg-steel-lite border-b border-steel-lite py-3 pl-2'
