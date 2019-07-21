@@ -1,7 +1,7 @@
 import React from 'react';
 import dateFns from 'date-fns';
 
-class NewTask extends React.Component {
+class NewTaskInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,8 +27,8 @@ class NewTask extends React.Component {
       <div className='sticky bg-white h-32 sm:mb-1'>
         <div className='pt-4 sm:pt-10 outline-none border-b border-steel-lite'>
           <div className='text-xl md:text-2xl h-12 font-thin ml-2'>
-            <b className='font-bold'>{dateFns.format(new Date(), 'dddd')}</b>
-            {dateFns.format(new Date(), ' — MMMM Do, YYYY')}
+            <b className='font-bold'>{dateFns.format(this.props.date, 'dddd')}</b>
+            {dateFns.format(this.props.date, ' — MMMM Do, YYYY')}
           </div>
           <div className='add-task relative'>
             <label className='add-icon text-ake font-thin text-3xl ml-2 z-10 absolute'>+</label>
@@ -66,4 +66,4 @@ class NewTask extends React.Component {
   }
 }
 
-export default NewTask;
+export default NewTaskInput;

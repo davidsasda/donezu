@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import dateFns from 'date-fns';
+
 import DayView from './components/dayView/DayView'
 import WeekView from './components/weekPane/WeekView';
 
@@ -7,12 +9,18 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      userID: '123'
+      userID: '123',
+      date: dateFns.format(new Date(), 'YYYY-MM-DD')
     }
+    this.switchDates = this.switchDates.bind(this);
   };
 
-  componentDidMount() {
-
+  switchDates(date) {
+    if (!dateFns.isFuture(date) && date != this.state.date) {
+      this.setState({
+        date: date
+      })
+    }
   }
 
   render() {
@@ -23,11 +31,15 @@ class App extends React.Component {
         </div>
         <div className='flex font-sans'>
           <div className='h-screen overflow-y-auto w-64 font-light text-sm tracking-tight hidden sm:block'>
-            <WeekView />
+            <WeekView
+              date={this.state.date}
+              switchDates={this.switchDates}
+            />
           </div>
           <div className='h-screen flex-col flex-grow text-ake'>
             <DayView 
               userID={this.state.userID}
+              date={this.state.date}
             />
           </div>
         </div>

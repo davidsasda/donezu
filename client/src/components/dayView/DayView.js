@@ -1,6 +1,9 @@
 import React from 'react';
-import TaskList from './TaskList';
 import dateFns from 'date-fns';
+
+import NewTaskInput from './NewTaskInput';
+import TaskList from './TaskList';
+import ArchiveList from './ArchiveList';
 
 const axios = require('axios');
 const server = 'http://localhost:3000';
@@ -23,7 +26,6 @@ class DayView extends React.Component {
     this.getArchive();
   }
 
-
   getTasks() {
     axios.get(`${server}/db/${this.props.userID}`)
     .then(res => {
@@ -33,7 +35,7 @@ class DayView extends React.Component {
       })
     })
     .catch(err => {
-      console.log(err);
+      // console.log(err);
     })
   }
 
@@ -47,7 +49,7 @@ class DayView extends React.Component {
         tasks: [{task: task}, ...prevState.tasks]
       }));
     } else {
-      console.log('Failed to add new task.')
+      // console.log('Failed to add new task.')
     }
   }
 
@@ -78,8 +80,7 @@ class DayView extends React.Component {
     });
   }
 
-  getArchive() {
-    let date = new Date();
+  getArchive(date = new Date()) {
     let year = dateFns.format(date, 'YYYY');
     let month = dateFns.format(date, 'MM');
     let day = dateFns.format(date, 'DD');
@@ -108,22 +109,40 @@ class DayView extends React.Component {
       }));
     })
     .catch(err => {
-      console.log(err);
+      // console.log(err);
     })
   }
 
   render() {
-    return (
-      <div>
-        <TaskList
-          tasks={this.state.tasks}
-          completed={this.state.completed}
-          addTask={this.addTask}
-          deleteTask={this.deleteTask}
-          completeTask={this.completeTask}
-        />
-      </div>
-    )
+    if (!dateFns.isToday(this.props.date)) {
+      return (
+        <div className='h-screen overflow-y-auto px-4 md:px-12 lg:px-24'>
+          <NewTaskInput
+            date={this.props.date}
+            addTask={this.addTask}
+          />
+          <ArchiveList
+            userID={this.props.userID}
+            date={this.props.date}
+          />
+        </div>
+      )
+    } else {
+      return (
+        <div className='h-screen overflow-y-auto px-4 md:px-12 lg:px-24'>
+          <NewTaskInput
+            date={this.props.date} 
+            addTask={this.addTask}
+          />
+          <TaskList
+            tasks={this.state.tasks}
+            completed={this.state.completed}
+            deleteTask={this.deleteTask}
+            completeTask={this.completeTask}
+          />
+        </div>
+      )
+    }
   }
 }
 

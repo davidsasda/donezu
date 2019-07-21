@@ -1,6 +1,7 @@
 import React from 'react';
-import WeekList from './WeekList';
 import dateFns from 'date-fns';
+
+import WeekList from './WeekList';
 import donezu from '/static/donezu.svg';
 
 class WeekView extends React.Component {
@@ -32,7 +33,7 @@ class WeekView extends React.Component {
         </div>
         <div className="weeks py-3 px-10">
           {this.state.weeksList.map((week, i) => {
-            return <WeekList key={i} startOfWeek={week}/>
+            return <WeekList key={i} startOfWeek={week} date={this.props.date} switchDates={this.props.switchDates}/>
           })}
         </div>
         <style jsx='true'>{`
