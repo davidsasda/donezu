@@ -40,6 +40,23 @@ router.get('/:userID/:year/:month/:day', (req, res) => {
   );
 });
 
+router.get('/weeks/:userID/:year/:month/:day', (req, res) => {
+  console.log('Donezu Week Read - Pinged');
+  db.readWeek(
+    req.params.userID,
+    `${req.params.year}-${req.params.month}-${req.params.day}`,
+    (err, data) => {
+      if (err) {
+        console.log('Donezu Archive Read - Error');
+        res.status(500).send(err);
+      } else {
+        console.log('Donezu Archive Read - Successful');
+        res.status(200).send(data);
+      }
+    }
+  );
+});
+
 router.put('/:userID/', (req, res) => {
   console.log('Donezu Archive Update - Pinged');
 });

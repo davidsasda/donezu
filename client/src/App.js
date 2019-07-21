@@ -32,6 +32,7 @@ class App extends React.Component {
         <div className='flex font-sans'>
           <div className='h-screen overflow-y-auto w-64 font-light text-sm tracking-tight hidden sm:block'>
             <WeekView
+              userID={this.state.userID}
               date={this.state.date}
               switchDates={this.switchDates}
             />

@@ -3,18 +3,63 @@ import dateFns from 'date-fns';
 
 import Day from './Day';
 
-const WeekList = ({startOfWeek, date, switchDates}) => {
-  return (
-    <div className='pb-3'>
-      <Day day={dateFns.addDays(startOfWeek, 6)} date={date} switchDates={switchDates}/>
-      <Day day={dateFns.addDays(startOfWeek, 5)} date={date} switchDates={switchDates}/>
-      <Day day={dateFns.addDays(startOfWeek, 4)} date={date} switchDates={switchDates}/>
-      <Day day={dateFns.addDays(startOfWeek, 3)} date={date} switchDates={switchDates}/>
-      <Day day={dateFns.addDays(startOfWeek, 2)} date={date} switchDates={switchDates}/>
-      <Day day={dateFns.addDays(startOfWeek, 1)} date={date} switchDates={switchDates}/>
-      <Day day={startOfWeek} date={date} switchDates={switchDates}/>
-    </div>
-  )
+const axios = require('axios');
+const server = 'http://localhost:3000';
+
+class WeekList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      week: []
+    }
+  }
+
+  componentDidMount() {
+    this.checkWeek();
+  }
+
+  checkWeek(date = this.props.startOfWeek) {
+    let year = dateFns.format(date, 'YYYY');
+    let month = dateFns.format(date, 'MM');
+    let day = dateFns.format(date, 'DD');
+    axios.get(`${server}/archives/weeks/${this.props.userID}/${year}/${month}/${day}`)
+    .then(res => {
+      for (let i = 0; i < res.data.length; i++) {
+        this.setState(prevState => ({
+          week: [...prevState.week, 
+            {
+              date: dateFns.addDays(this.props.startOfWeek, 6 - i),
+              counter: res.data[i]
+            }
+          ]
+        }))
+      }
+    })
+  }
+
+  checkStyle(day) {
+    let style = ''
+    if (dateFns.format(day, 'YYYY-MM-DD') === this.props.date) {
+      style = 'text-ake font-bold cursor-default'; // current view
+    } else if (dateFns.isToday(day) && dateFns.format(day, 'YYYY-MM-DD') != this.props.date) { 
+      style = 'text-ake hover:font-bold cursor-pointer'; // if today isn't the current view
+    } else if (dateFns.isPast(day) && dateFns.format(day, 'YYYY-MM-DD') != this.props.date) {
+      style = 'text-steel hover:text-ake hover:font-bold cursor-pointer'; // if day is in the past
+    } else if (dateFns.isFuture(day)){
+      style = 'text-midnight cursor-default'; // if day is in the future
+    }
+    return style;
+  }
+
+  render() {
+    return (
+      <div className='pb-3'>
+        {this.state.week.length > 0 && this.state.week.map((day, i) => {
+          return<Day key={i} day={day.date} counter={day.counter} style={this.checkStyle(day.date)} switchDates={this.props.switchDates}/>
+        })}
+      </div>
+    )
+  }
 }
 
 export default WeekList;

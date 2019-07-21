@@ -12,7 +12,7 @@ router.post('/:userID', (req, res) => {
         res.status(500).send(err);
       } else {
         console.log('Donezu Create - Successful');
-        res.status(201);
+        res.status(201).send();
       }
     }
   );
