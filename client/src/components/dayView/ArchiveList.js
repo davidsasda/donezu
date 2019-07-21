@@ -7,8 +7,8 @@ const axios = require('axios');
 const server = 'http://localhost:3000';
 
 class ArchiveList extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       archive: []
     }

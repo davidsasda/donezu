@@ -5,8 +5,8 @@ import WeekList from './WeekList';
 import donezu from '/static/donezu.svg';
 
 class WeekView extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       weeksList: [dateFns.startOfWeek(new Date(), {weekStartsOn: 1})]
     }
@@ -33,7 +33,7 @@ class WeekView extends React.Component {
         </div>
         <div className="weeks py-3 px-10">
           {this.state.weeksList.map((week, i) => {
-            return <WeekList key={i} startOfWeek={week} date={this.props.date} switchDates={this.props.switchDates}/>
+            return <WeekList key={i} startOfWeek={week} userID={this.props.userID} date={this.props.date} switchDates={this.props.switchDates}/>
           })}
         </div>
         <style jsx='true'>{`

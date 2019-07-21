@@ -9,8 +9,8 @@ const axios = require('axios');
 const server = 'http://localhost:3000';
 
 class DayView extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       tasks: [],
       completed: []
@@ -45,9 +45,11 @@ class DayView extends React.Component {
       .catch(err => {
         console.log(err);
       })
-      this.setState(prevState => ({
-        tasks: [{task: task}, ...prevState.tasks]
-      }));
+      .then(() => {
+        this.setState(prevState => ({
+          tasks: [{task: task}, ...prevState.tasks]
+        }));
+      })
     } else {
       // console.log('Failed to add new task.')
     }
@@ -113,14 +115,10 @@ class DayView extends React.Component {
     })
   }
 
-  render() {
+  renderList() {
     if (!dateFns.isToday(this.props.date)) {
       return (
-        <div className='h-screen overflow-y-auto px-4 md:px-12 lg:px-24'>
-          <NewTaskInput
-            date={this.props.date}
-            addTask={this.addTask}
-          />
+        <div>
           <ArchiveList
             userID={this.props.userID}
             date={this.props.date}
@@ -129,20 +127,30 @@ class DayView extends React.Component {
       )
     } else {
       return (
-        <div className='h-screen overflow-y-auto px-4 md:px-12 lg:px-24'>
-          <NewTaskInput
-            date={this.props.date} 
-            addTask={this.addTask}
-          />
-          <TaskList
-            tasks={this.state.tasks}
-            completed={this.state.completed}
-            deleteTask={this.deleteTask}
-            completeTask={this.completeTask}
-          />
+        <div>
+          {this.state && this.state.tasks && 
+            <TaskList
+              tasks={this.state.tasks}
+              completed={this.state.completed}
+              deleteTask={this.deleteTask}
+              completeTask={this.completeTask}
+            />
+          }
         </div>
       )
     }
+  }
+
+  render() {
+    return (
+      <div className='h-screen overflow-y-auto px-4 md:px-12 lg:px-24'>
+        <NewTaskInput
+          date={this.props.date} 
+          addTask={this.addTask}
+        />
+        {this.renderList()}
+      </div>
+    )
   }
 }
 
