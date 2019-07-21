@@ -18,6 +18,12 @@ class ArchiveList extends React.Component {
     this.getArchive(this.props.date);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.date !== prevProps.date) {
+      this.getArchive(this.props.date);
+    }
+  }
+
   getArchive(date) {
     let year = dateFns.format(date, 'YYYY');
     let month = dateFns.format(date, 'MM');
