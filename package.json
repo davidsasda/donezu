@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "tailwind build ./client/tailwind.css -c ./client/tailwind.js -o ./client/src/style.css && parcel ./client/src/index.html --open",
+    "start": "tailwind build ./client/tailwind.css -c ./client/tailwind.config.js -o ./client/src/style.css && parcel ./client/src/index.html --open",
     "build": "parcel build ./client/src/index.html",
     "dev-server": "nodemon server/server.js"
   },
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/davidsasda/donezu#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "cors": "^2.8.5",
     "date-fns": "^1.30.1",
     "react": "^16.8.4",
@@ -33,6 +33,6 @@
     "mongoose": "^5.5.10",
     "parcel-bundler": "^1.12.3",
     "postcss": "^7.0.14",
-    "tailwindcss": "^0.7.4"
+    "tailwindcss": "^1.0.5"
   }
 }

@@ -33,8 +33,8 @@ class Task extends React.Component {
         >x</button>
       }
       <button
-        className='text-ake hover:line-through'
-        onClick={() => this.handleCompleteTask()}
+        className='text-ake cursor-text'
+        // onClick={() => this.handleCompleteTask()}
       >
         {this.props.task}  
       </button>

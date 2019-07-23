@@ -36,7 +36,9 @@ class ArchiveList extends React.Component {
       });
     })
     .catch(err => {
-      // console.log(err);
+      this.setState({
+        archive: []
+      })
     })
   }
 
