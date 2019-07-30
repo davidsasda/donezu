@@ -5,8 +5,7 @@ import NewTaskInput from './NewTaskInput';
 import TaskList from './TaskList';
 import ArchiveList from './ArchiveList';
 
-const axios = require('axios');
-const server = 'http://localhost:3000';
+import api from '../../utils/api';
 
 class DayView extends React.Component {
   constructor(props) {
@@ -27,7 +26,7 @@ class DayView extends React.Component {
   }
 
   getTasks() {
-    axios.get(`${server}/db/${this.props.userID}`)
+    api.get(`/db/${this.props.userID}`)
     .then(res => {
       res.data.reverse();
       this.setState({
@@ -41,7 +40,7 @@ class DayView extends React.Component {
 
   addTask(task) {
     if (task) {
-      axios.post(`${server}/db/${this.props.userID}`, {task: task})
+      api.post(`/db/${this.props.userID}`, {task: task})
       .catch(err => {
         console.log(err);
       })
@@ -57,7 +56,7 @@ class DayView extends React.Component {
 
   deleteTask(index) {
     let dbIndex = (this.state.tasks.length - index - 1);
-    axios.delete(`${server}/db/${this.props.userID}/${dbIndex}`)
+    api.delete(`/db/${this.props.userID}/${dbIndex}`)
     .then(() => {
       let updatedTasks = this.state.tasks;
       if (index === 0) {
@@ -86,7 +85,7 @@ class DayView extends React.Component {
     let year = dateFns.format(date, 'YYYY');
     let month = dateFns.format(date, 'MM');
     let day = dateFns.format(date, 'DD');
-    axios.get(`${server}/archives/${this.props.userID}/${year}/${month}/${day}`)
+    api.get(`/archives/${this.props.userID}/${year}/${month}/${day}`)
     .then(res => {
       res.data.reverse();
       this.setState({
@@ -103,7 +102,7 @@ class DayView extends React.Component {
     let year = dateFns.format(date, 'YYYY');
     let month = dateFns.format(date, 'MM');
     let day = dateFns.format(date, 'DD');
-    axios.post(`${server}/archives/${this.props.userID}/${year}/${month}/${day}`, {task: task, date: date})
+    api.post(`/archives/${this.props.userID}/${year}/${month}/${day}`, {task: task, date: date})
     .then(() => {
       this.deleteTask(index);
       this.setState(prevState => ({

@@ -2,9 +2,7 @@ import React from 'react';
 import dateFns from 'date-fns';
 
 import Day from './Day';
-
-const axios = require('axios');
-const server = 'http://localhost:3000';
+import api from '../../utils/api';
 
 class WeekList extends React.Component {
   constructor(props) {
@@ -22,7 +20,7 @@ class WeekList extends React.Component {
     let year = dateFns.format(date, 'YYYY');
     let month = dateFns.format(date, 'MM');
     let day = dateFns.format(date, 'DD');
-    axios.get(`${server}/archives/weeks/${this.props.userID}/${year}/${month}/${day}`)
+    api.get(`/weeks/${this.props.userID}/${year}/${month}/${day}`)
     .then(res => {
       for (let i = 0; i < res.data.length; i++) {
         this.setState(prevState => ({
@@ -30,6 +28,18 @@ class WeekList extends React.Component {
             {
               date: dateFns.addDays(this.props.startOfWeek, 6 - i),
               counter: res.data[i]
+            }
+          ]
+        }))
+      }
+    })
+    .catch(err => {
+      for (let i = 0; i < 7; i++) {
+        this.setState(prevState => ({
+          week: [...prevState.week, 
+            {
+              date: dateFns.addDays(this.props.startOfWeek, 6 - i),
+              counter: 0
             }
           ]
         }))
