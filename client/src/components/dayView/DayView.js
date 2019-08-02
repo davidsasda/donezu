@@ -5,7 +5,7 @@ import NewTaskInput from './NewTaskInput';
 import TaskList from './TaskList';
 import ArchiveList from './ArchiveList';
 
-import api from '../../utils/api';
+import api from '../../config/api';
 
 class DayView extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class DayView extends React.Component {
   }
 
   getTasks() {
-    api.get(`/db/${this.props.userID}`)
+    api.get(`/tasks/${this.props.userID}`)
     .then(res => {
       res.data.reverse();
       this.setState({
@@ -40,7 +40,7 @@ class DayView extends React.Component {
 
   addTask(task) {
     if (task) {
-      api.post(`/db/${this.props.userID}`, {task: task})
+      api.post(`/tasks/${this.props.userID}`, {task: task})
       .catch(err => {
         console.log(err);
       })
@@ -56,7 +56,7 @@ class DayView extends React.Component {
 
   deleteTask(index) {
     let dbIndex = (this.state.tasks.length - index - 1);
-    api.delete(`/db/${this.props.userID}/${dbIndex}`)
+    api.delete(`/tasks/${this.props.userID}/${dbIndex}`)
     .then(() => {
       let updatedTasks = this.state.tasks;
       if (index === 0) {

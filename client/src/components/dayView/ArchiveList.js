@@ -3,7 +3,7 @@ import dateFns from 'date-fns';
 
 import CompletedTask from './CompletedTask';
 
-import api from '../../utils/api';
+import api from '../../config/api';
 
 class ArchiveList extends React.Component {
   constructor(props) {
