@@ -3,8 +3,7 @@ import dateFns from 'date-fns';
 
 import CompletedTask from './CompletedTask';
 
-const axios = require('axios');
-const server = 'http://localhost:3000';
+import api from '../../config/api';
 
 class ArchiveList extends React.Component {
   constructor(props) {
@@ -28,7 +27,7 @@ class ArchiveList extends React.Component {
     let year = dateFns.format(date, 'YYYY');
     let month = dateFns.format(date, 'MM');
     let day = dateFns.format(date, 'DD');
-    axios.get(`${server}/archives/${this.props.userID}/${year}/${month}/${day}`)
+    api.get(`/archives/${this.props.userID}/${year}/${month}/${day}`)
     .then(res => {
       res.data.reverse();
       this.setState({
