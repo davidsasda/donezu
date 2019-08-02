@@ -6,6 +6,8 @@ import DayView from './components/dayView/DayView';
 import WeekView from './components/weekPane/WeekView';
 import Login from './components/login/Login';
 
+import api from './config/api';
+
 class App extends React.Component {
   constructor() {
     super();
@@ -15,6 +17,17 @@ class App extends React.Component {
     }
     this.switchDates = this.switchDates.bind(this);
   };
+
+  componentDidMount() {
+    if (document.cookie) {
+      api.get('/users/login', {withCredentials: true})
+      .then(res => {
+        this.setState({
+          userID: res.data.user.email
+        })
+      })
+    }
+  }
 
   switchDates(date) {
     if (!dateFns.isFuture(date) && date != this.state.date) {
