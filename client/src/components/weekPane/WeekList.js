@@ -53,7 +53,7 @@ class WeekList extends React.Component {
 
   render() {
     return (
-      <div className='pb-3'>
+      <div className='pb-3 leading-tight'>
         {this.state.week.length > 0 && this.state.week.map((day, i) => {
           return<Day key={i} day={day.date} counter={day.counter} style={this.checkStyle(day.date)} switchDates={this.props.switchDates}/>
         })}

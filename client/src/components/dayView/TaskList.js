@@ -5,7 +5,7 @@ import CompletedTask from './CompletedTask';
 const TaskList = ({tasks, completed, deleteTask, completeTask}) => {
   let index = -1;
   return (
-    <div className='pb-12'>
+    <div className='pb-12 leading-tight'>
       {tasks.length > 0 && tasks.map((obj, i) => {
         index++
         return <Task key={i} task={obj.task} deleteTask={deleteTask} completeTask={completeTask} index={index}/>
