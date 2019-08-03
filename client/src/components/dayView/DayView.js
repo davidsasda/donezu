@@ -21,21 +21,30 @@ class DayView extends React.Component {
   }
 
   componentDidMount() {
-    this.getTasks();
-    this.getArchive();
+    this.getTasks(this.props.userID);
+    this.getArchive(this.props.userID);
   }
 
-  getTasks() {
-    api.get(`/tasks/${this.props.userID}`)
-    .then(res => {
-      res.data.reverse();
-      this.setState({
-        tasks: res.data
+  componentDidUpdate(prevProps) {
+    if (this.props.userID !== prevProps.userID) {
+      this.getTasks(this.props.userID);
+      this.getArchive(this.props.userID);
+    }
+  }
+
+  getTasks(user) {
+    if (user) {
+      api.get(`/tasks/${user}`)
+      .then(res => {
+        res.data.reverse();
+        this.setState({
+          tasks: res.data
+        })
       })
-    })
-    .catch(err => {
-      // console.log(err);
-    })
+      .catch(err => {
+        // console.log(err);
+      })
+    }
   }
 
   addTask(task) {
@@ -49,69 +58,63 @@ class DayView extends React.Component {
           tasks: [{task: task}, ...prevState.tasks]
         }));
       })
-    } else {
-      // console.log('Failed to add new task.')
     }
   }
 
-  deleteTask(index) {
+  deleteTask(user, index) {
     let dbIndex = (this.state.tasks.length - index - 1);
-    api.delete(`/tasks/${this.props.userID}/${dbIndex}`)
-    .then(() => {
-      let updatedTasks = this.state.tasks;
-      if (index === 0) {
-        updatedTasks.shift();
-      } else {
-        updatedTasks = [...updatedTasks.slice(0, index), ...updatedTasks.slice(index + 1)];
-      }
-      this.setState({
-        tasks: updatedTasks
-      });
-    })
-    .catch(err => {
-      let updatedTasks = this.state.tasks;
-      if (index === 0) {
-        updatedTasks.shift();
-      } else {
-        updatedTasks = [...updatedTasks.slice(0, index), ...updatedTasks.slice(index + 1)];
-      }
-      this.setState({
-        tasks: updatedTasks
-      });
+    let updatedTasks = this.state.tasks;
+
+    if (user) {
+      api.delete(`/tasks/${user}/${dbIndex}`);
+    }
+
+    if (index === 0) {
+      updatedTasks.shift();
+    } else {
+      updatedTasks = [...updatedTasks.slice(0, index), ...updatedTasks.slice(index + 1)];
+    }
+    
+    this.setState({
+      tasks: updatedTasks
     });
   }
 
-  getArchive(date = new Date()) {
+  getArchive(user, date = new Date()) {
     let year = dateFns.format(date, 'YYYY');
     let month = dateFns.format(date, 'MM');
     let day = dateFns.format(date, 'DD');
-    api.get(`/archives/${this.props.userID}/${year}/${month}/${day}`)
-    .then(res => {
-      res.data.reverse();
-      this.setState({
-        completed: res.data
-      });
-    })
-    .catch(err => {
-      // console.log(err);
-    })
+    if (user) {
+      api.get(`/archives/${user}/${year}/${month}/${day}`)
+      .then(res => {
+        res.data.reverse();
+        this.setState({
+          completed: res.data
+        });
+      })
+      .catch(err => {
+        // console.log(err);
+      })
+    }
   }
 
-  completeTask(task, index) {
+  completeTask(user, task, index) {
     let date = new Date();
     let year = dateFns.format(date, 'YYYY');
     let month = dateFns.format(date, 'MM');
     let day = dateFns.format(date, 'DD');
-    api.post(`/archives/${this.props.userID}/${year}/${month}/${day}`, {task: task, date: date})
-    .then(() => {
-      this.deleteTask(index);
-      this.setState(prevState => ({
-        completed: [{task: task}, ...prevState.completed]
-      }));
-    })
-    .catch(err => {
-      // console.log(err);
-    })
+    if (user) {
+      api.post(`/archives/${user}/${year}/${month}/${day}`, {task: task, date: date})
+      .then(() => {
+        this.deleteTask(index);
+        this.setState(prevState => ({
+          completed: [{task: task}, ...prevState.completed]
+        }));
+      })
+      .catch(err => {
+        // console.log(err);
+      })
+    }
   }
 
   renderList() {

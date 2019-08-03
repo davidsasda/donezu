@@ -14,31 +14,35 @@ class ArchiveList extends React.Component {
   }
 
   componentDidMount() {
-    this.getArchive(this.props.date);
+    this.getArchive(this.props.userID, this.props.date);
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.date !== prevProps.date) {
-      this.getArchive(this.props.date);
+    if (this.props.date !== prevProps.date || this.props.userID !== prevProps.userID) {
+      this.getArchive(this.props.userID, this.props.date);
     }
   }
 
-  getArchive(date) {
+  getArchive(user, date) {
     let year = dateFns.format(date, 'YYYY');
     let month = dateFns.format(date, 'MM');
     let day = dateFns.format(date, 'DD');
-    api.get(`/archives/${this.props.userID}/${year}/${month}/${day}`)
-    .then(res => {
-      res.data.reverse();
-      this.setState({
-        archive: res.data
-      });
-    })
-    .catch(err => {
-      this.setState({
-        archive: []
+    if (!user) {
+      return null
+    } else {
+      api.get(`/archives/${user}/${year}/${month}/${day}`)
+      .then(res => {
+        res.data.reverse();
+        this.setState({
+          archive: res.data
+        });
       })
-    })
+      .catch(err => {
+        this.setState({
+          archive: []
+        })
+      })
+    }
   }
 
   render() {
