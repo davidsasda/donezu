@@ -18,10 +18,3 @@ npm start
 ```
 
 This will start a development server at http://localhost:1234/ and will automatically rebuild the project as you change files
-
-### Building for production
-
-To build the assets once for production:
-```sh
-npm run build
-```
