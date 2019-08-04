@@ -1,6 +1,6 @@
 import React from 'react';
 
-import api from '../../config/api';
+import api from '../../../config/api';
 
 class Login extends React.Component {
   constructor(props) {

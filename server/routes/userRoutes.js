@@ -2,7 +2,8 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const User = require('../Model/User.js');
+
+const User = require('../model/User.js');
 
 router.post('/register', async (req, res) => {
   console.log('Donezu User Register - Pinged');

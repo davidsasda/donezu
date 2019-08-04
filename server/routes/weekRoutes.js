@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const User = require('../Model/User.js');
 const dateFns = require('date-fns');
+
+const User = require('../model/User.js');
 
 router.get('/:email/:year/:month/:day', async (req, res) => {
   console.log('Donezu Week Read - Pinged');

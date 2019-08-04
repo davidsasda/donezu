@@ -2,7 +2,7 @@ import React from 'react';
 import dateFns from 'date-fns';
 
 import Day from './Day';
-import api from '../../config/api';
+import api from '../../../config/api';
 
 class WeekList extends React.Component {
   constructor(props) {

@@ -7,7 +7,7 @@ import WeekView from './components/weekPane/WeekView';
 import Login from './components/login/Login';
 import Logout from './components/login/Logout'
 
-import api from './config/api';
+import api from '../config/api';
 
 class App extends React.Component {
   constructor() {

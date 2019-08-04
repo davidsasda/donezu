@@ -5,7 +5,7 @@ import NewTaskInput from './NewTaskInput';
 import TaskList from './TaskList';
 import ArchiveList from './ArchiveList';
 
-import api from '../../config/api';
+import api from '../../../config/api';
 
 class DayView extends React.Component {
   constructor(props) {
