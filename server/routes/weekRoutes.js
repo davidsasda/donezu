@@ -15,14 +15,15 @@ router.get('/:email/:year/:month/:day', async (req, res) => {
     res.status(500).send();
   }
 
+  // Order: [S, S, F, T, W, T, M]
   let week = [
-    dateFns.format(dateFns.addDays(startOfWeek, 6), 'YYYY-MM-DD').split('-'), // Sunday
-    dateFns.format(dateFns.addDays(startOfWeek, 5), 'YYYY-MM-DD').split('-'), // Saturday
-    dateFns.format(dateFns.addDays(startOfWeek, 4), 'YYYY-MM-DD').split('-'), // Friday
-    dateFns.format(dateFns.addDays(startOfWeek, 3), 'YYYY-MM-DD').split('-'), // Thursday
-    dateFns.format(dateFns.addDays(startOfWeek, 2), 'YYYY-MM-DD').split('-'), // Wednesday
-    dateFns.format(dateFns.addDays(startOfWeek, 1), 'YYYY-MM-DD').split('-'), // Tuesday
-    dateFns.format(startOfWeek, 'YYYY-MM-DD').split('-') // Monday
+    dateFns.format(dateFns.addDays(startOfWeek, 6), 'YYYY-MM-DD').split('-'),
+    dateFns.format(dateFns.addDays(startOfWeek, 5), 'YYYY-MM-DD').split('-'),
+    dateFns.format(dateFns.addDays(startOfWeek, 4), 'YYYY-MM-DD').split('-'),
+    dateFns.format(dateFns.addDays(startOfWeek, 3), 'YYYY-MM-DD').split('-'),
+    dateFns.format(dateFns.addDays(startOfWeek, 2), 'YYYY-MM-DD').split('-'),
+    dateFns.format(dateFns.addDays(startOfWeek, 1), 'YYYY-MM-DD').split('-'),
+    dateFns.format(startOfWeek, 'YYYY-MM-DD').split('-')
   ]
 
   // reads each day of the week from db
