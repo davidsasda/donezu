@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const User = require('../model/User.js');
+const User = require('../models/User.js');
 
 router.post('/:email/:year/:month/:day', async (req, res) => {
   console.log('Donezu Archive Create - Pinged');

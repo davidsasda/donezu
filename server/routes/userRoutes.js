@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
-const User = require('../model/User.js');
+const User = require('../models/User.js');
 
 router.post('/register', async (req, res) => {
   console.log('Donezu User Register - Pinged');
