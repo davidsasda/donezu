@@ -5,7 +5,7 @@
 
 ### Installing Dependencies
 
-From within the root directory:
+From within the client directory:
 ```sh
 npm install
 ```
