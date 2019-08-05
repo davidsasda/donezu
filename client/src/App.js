@@ -5,8 +5,9 @@ import dateFns from 'date-fns';
 import DayView from './components/dayView/DayView';
 import WeekView from './components/weekPane/WeekView';
 import Login from './components/login/Login';
+import Logout from './components/login/Logout'
 
-import api from './config/api';
+import api from '../config/api';
 
 class App extends React.Component {
   constructor() {
@@ -37,41 +38,46 @@ class App extends React.Component {
     }
   }
 
-  handleView() {
-    if (this.state.userID) {
-      return (
+  handleLogin() {
+    if (!this.state.userID) {
+      return(
         <div>
-          <div className='sticky w-full h-16 bg-white shadow z-20 sm:hidden'>
-            boink
-          </div>
-          <div className='flex font-sans'>
-            <div className='h-screen overflow-y-auto w-64 font-light text-sm tracking-tight hidden sm:block'>
-              <WeekView
-                userID={this.state.userID}
-                date={this.state.date}
-                switchDates={this.switchDates}
-              />
-            </div>
-            <div className='h-screen flex-col flex-grow text-ake'>
-              <DayView 
-                userID={this.state.userID}
-                date={this.state.date}
-              />
-            </div>
-          </div>
+          <Login />
         </div>
       )
     } else {
       return(
         <div>
-          <Login />
+          <Logout />
         </div>
       )
     }
   }
 
   render() {
-    return this.handleView()
+    return (
+      <div>
+        <div className='sticky w-full h-16 bg-white shadow z-20 sm:hidden'>
+          boink
+        </div>
+        <div className='flex font-sans'>
+          <div className='h-screen overflow-y-auto w-64 font-light text-sm tracking-tight hidden sm:block'>
+            <WeekView
+              userID={this.state.userID}
+              date={this.state.date}
+              switchDates={this.switchDates}
+            />
+          </div>
+          <div className='h-screen flex-col flex-grow text-ake'>
+            <DayView 
+              userID={this.state.userID}
+              date={this.state.date}
+            />
+          </div>
+          {this.handleLogin()}
+        </div>
+      </div>
+    )
   };
 }
 

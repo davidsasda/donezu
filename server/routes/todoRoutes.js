@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const User = require('../Model/User.js');
+
+const User = require('../models/User.js');
 
 router.post('/:email', async (req, res) => {
   console.log('Donezu Create - Pinged');

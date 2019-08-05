@@ -1,6 +1,6 @@
 import React from 'react';
 
-import api from '../../config/api';
+import api from '../../../config/api';
 
 class Login extends React.Component {
   constructor(props) {
@@ -8,6 +8,7 @@ class Login extends React.Component {
     this.state = {
       view: '',
       username: '',
+      email: '',
       password: '',
       password2: ''
     }
@@ -17,9 +18,6 @@ class Login extends React.Component {
     this.setState({
       [target]: event.target.value
     })
-  }
-
-  handleEnterKey() {
   }
 
   handleRegister() {
@@ -39,7 +37,7 @@ class Login extends React.Component {
       password: this.state.password
     }
     api.post(`/users/login`, query, {withCredentials: true})
-    .then()
+    .then(() => window.location.reload(false))
     .catch()
   }
 

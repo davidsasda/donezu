@@ -1,6 +1,6 @@
 .cache
-client/src/style.css
-.env
+src/style.css
 dist
+.env
 node_modules
 package-lock.json

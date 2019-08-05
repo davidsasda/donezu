@@ -36,14 +36,6 @@ mongoose.connect(db, {useNewUrlParser: true})
 require('./passport.js');
 app.use(passport.initialize());
 
-// app.use((req, res, next) => {
-//   console.log('Time:', Date.now());
-//   if (!req.headers.authorization) {
-//     console.log(req.headers.authorization);
-//   }
-//   next();
-// })
-
 // Routes
 app.use('/archives', archiveRoutes);
 app.use('/tasks', todoRoutes);

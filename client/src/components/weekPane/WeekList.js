@@ -2,7 +2,7 @@ import React from 'react';
 import dateFns from 'date-fns';
 
 import Day from './Day';
-import api from '../../config/api';
+import api from '../../../config/api';
 
 class WeekList extends React.Component {
   constructor(props) {
@@ -16,35 +16,41 @@ class WeekList extends React.Component {
     this.checkWeek();
   }
 
-  checkWeek(date = this.props.startOfWeek) {
+  componentDidUpdate(prevProps) {
+    if (this.props.userID !== prevProps.userID) {
+      this.checkWeek();
+    }
+  }
+
+  checkWeek(user = this.props.userID, date = this.props.startOfWeek) {
     let year = dateFns.format(date, 'YYYY');
     let month = dateFns.format(date, 'MM');
     let day = dateFns.format(date, 'DD');
-    api.get(`/weeks/${this.props.userID}/${year}/${month}/${day}`)
-    .then(res => {
-      for (let i = 0; i < res.data.length; i++) {
-        this.setState(prevState => ({
-          week: [...prevState.week, 
-            {
-              date: dateFns.addDays(this.props.startOfWeek, 6 - i),
-              counter: res.data[i]
-            }
-          ]
-        }))
-      }
-    })
-    .catch(err => {
-      for (let i = 0; i < 7; i++) {
-        this.setState(prevState => ({
-          week: [...prevState.week, 
-            {
-              date: dateFns.addDays(this.props.startOfWeek, 6 - i),
-              counter: 0
-            }
-          ]
-        }))
-      }
-    })
+    if (user) {
+      api.get(`/weeks/${user}/${year}/${month}/${day}`)
+      .then(res => {
+        this.updateCounters(res.data);
+      })
+      .catch(err => {
+        this.updateCounters();
+      })
+    } else {
+      this.updateCounters();
+    }
+  }
+
+  updateCounters(data = []) {
+    this.setState({week: []});
+    for (let i = 0; i < 7; i++) {
+      this.setState(prevState => ({
+        week: [...prevState.week, 
+          {
+            date: dateFns.addDays(this.props.startOfWeek, 6 - i),
+            counter: data[i] || 0
+          }
+        ]
+      }))
+    }
   }
 
   checkStyle(day) {

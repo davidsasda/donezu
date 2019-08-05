@@ -1,20 +1,10 @@
 # Donezu
-> A simple todo app to get shit ~~donezu~~
+> A simple todo app to get stuff ~~donezu~~
 
-## Development
+## Client and Server
 
-### Installing Dependencies
+There are two folders: `client` and `server`
 
-From within the root directory:
-```sh
-npm install
-```
+They are seperate and have their own set of instructions inside
 
-### Running on development server
-
-To open the project for development:
-```sh
-npm start
-```
-
-This will start a development server at http://localhost:1234/ and will automatically rebuild the project as you change files
+Both should be running on two different terminals
