@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const JWTStrategy = require('passport-jwt').Strategy;
 const bcrypt = require('bcrypt');
 
-const User = require('./model/User.js');
+const User = require('./models/User.js');
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
