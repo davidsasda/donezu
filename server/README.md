@@ -36,7 +36,7 @@ This will start a server at http://localhost:3000/ by default (Note: The server 
 
 To open the project for development:
 ```sh
-npm run dev-start
+npm run dev-server
 ```
 
 This will run the server with Nodemon, which automatically restarts the server when any changes are made
